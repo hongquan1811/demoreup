@@ -14,7 +14,13 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        $index = School::get();
+        $search_infor = \request()->search;
+        if($search_infor!="")
+        {
+            $index = School::where('school_name','LIKE',"%$search_infor%")->orwhere('address','LIKE',"%$search_infor%")->get();
+            return view('school.index',compact('index'));
+        }
+        $index = School::all();
         return view('school.index',compact('index'));
     }
 

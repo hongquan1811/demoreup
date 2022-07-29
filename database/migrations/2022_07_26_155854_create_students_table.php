@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
 
-            $table->increments('id');
+            $table->id();
             $table->string('student_name');
             $table->integer('school_id');
             $table->integer('classroom_id');

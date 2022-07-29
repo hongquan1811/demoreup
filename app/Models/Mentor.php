@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use     Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Mentor extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function classrooms()
+    public function classroom()
     {
-        return $this->belongsTo(Mentor::class,'mentor_id', 'id');
+        return $this->hasMany(Classroom::class,'classroom_id', 'id');
     }
 }

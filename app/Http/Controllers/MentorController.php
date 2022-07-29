@@ -14,7 +14,13 @@ class MentorController extends Controller
      */
     public function index()
     {
-        $index = Mentor::get();
+        $search_infor = \request()->search;
+        if($search_infor !="")
+        {
+            $index = Mentor::where('mentor_name','LIKE',"%$search_infor%")->orWhere('subject','LIKE',"%$search_infor%")->get();
+            return view('mentor.index', compact('index'));
+        }
+        $index = Mentor::all();
         return view('mentor.index', compact('index'));
     }
 

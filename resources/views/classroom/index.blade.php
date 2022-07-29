@@ -1,6 +1,6 @@
 @extends('display.home')
 @section('title')
-    List Mentor
+    List Classes
 @endsection
 @section('content')
     <table class="table" id="table_id">
@@ -8,38 +8,40 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Subject</th>
+            <th scope="col">Mentor</th>
+            <th scope="col">Roof</th>
             <th scope="col">Option</th>
         </tr>
         </thead>
         <tbody>
         <div>
-            <a href="{{route('mentors.create')}}">
+            <a href="{{route('classrooms.create')}}">
                 <button type="button" class="btn btn-primary">Add</button>
             </a>
         </div>
         <div class="input-group mb-3">
-            <form action="{{ route('mentors.index') }}" method="get" style="display: inline-block">
-                <input type="search" class="form-control" name="search" style="margin-left: 1300px" placeholder="Search here" ">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;" >Search</button>
+            <form action="{{ route('classrooms.index') }}" method="get" style="display: inline-block">
+                <input type="search" class="form-control" name="search" style="margin-left: 1300px" placeholder="Search here" value="">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;"  >Search</button>
             </form>
         </div>
         @php
             $i=1;
         @endphp
-        @foreach($index as $mentor)
+        @foreach($index as $classroom)
             <tr>
                 <td>{{$i++}}</td>
-                <td>{{$mentor->mentor_name}}</td>
-                <td>{{$mentor->subject}}</td>
+                <td>{{$classroom->classroom_name}}</td>
+                <td>{{$classroom->mentor->mentor_name}}</td>
+                <td>{{$classroom->roof}}</td>
                 <td>
-                    <form action="{{route('mentors.show', $mentor->id)}}" method="get" style="display: inline-block">
+                    <form action="{{route('classrooms.show', $classroom->id)}}" method="get" style="display: inline-block">
                         <button type="submit" class="btn btn-primary">View</button>
                     </form>
-                    <form action="{{route('mentors.edit', $mentor->id)}}" method="get" style="display: inline-block">
+                    <form action="{{route('classrooms.edit', $classroom->id)}}" method="get" style="display: inline-block">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
-                    <form action="{{route('mentors.destroy', $mentor->id)}}" method="post" onclick="myFunction()" style="display: inline-block">
+                    <form action="{{route('classrooms.destroy', $classroom->id)}}" method="post" onclick="myFunction()" style="display: inline-block">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -57,4 +59,5 @@
     </script>
 
 @endsection
+
 

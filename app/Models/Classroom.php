@@ -13,8 +13,8 @@ class Classroom extends Model
     {
         return $this->hasMany(Student::class, 'classroom_id', 'id');
     }
-    public function mentors()
+    public function mentor()
     {
-        return $this->hasMany(Mentor::class, 'mentor_id', 'id');
+        return $this->belongsTo(Mentor::class, 'mentor_id', 'id');
     }
 }

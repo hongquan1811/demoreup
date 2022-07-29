@@ -43,28 +43,28 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('students.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Danh sách học sinh</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{route('classrooms.index')}}" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Danh sách lớp</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                        <li class="nav-item">
+                            <a href="{{route('students.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Student</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('classrooms.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Classroom</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{route('mentors.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách giáo viên</p>
+                                <p>Mentor</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('schools.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách trường học</p>
+                                <p>School</p>
                             </a>
                         </li>
                     </ul>
