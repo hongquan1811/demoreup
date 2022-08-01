@@ -33,7 +33,7 @@
         @php
             $i=1;
         @endphp
-        @foreach($index as $student)
+        @foreach($students as $student)
             <tr>
                 <td>{{$i++}}</td>
                 <td>{{$student->student_name}}</td>

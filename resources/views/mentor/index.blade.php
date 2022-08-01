@@ -27,7 +27,7 @@
         @php
             $i=1;
         @endphp
-        @foreach($index as $mentor)
+        @foreach($mentors as $mentor)
             <tr>
                 <td>{{$i++}}</td>
                 <td>{{$mentor->mentor_name}}</td>

@@ -20,8 +20,8 @@ class SchoolController extends Controller
             $index = School::where('school_name','LIKE',"%$search_infor%")->orwhere('address','LIKE',"%$search_infor%")->get();
             return view('school.index',compact('index'));
         }
-        $index = School::all();
-        return view('school.index',compact('index'));
+        $schools = School::all();
+        return view('school.index',compact('schools'));
     }
 
     /**

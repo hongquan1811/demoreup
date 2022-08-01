@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class School extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $table = 'schools';
+    protected $fillable
+        = [
+            'school_name',
+            'address'
+        ];
+
     public function students()
     {
-        return $this->hasMany(Student::class, 'school_id','id');
+        return $this->hasMany(Student::class);
     }
 }

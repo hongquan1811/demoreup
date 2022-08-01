@@ -27,7 +27,7 @@
         @php
             $i=1;
         @endphp
-        @foreach($index as $school)
+        @foreach($schools as $school)
             <tr>
                 <td>{{$i++}}</td>
                 <td>{{$school->school_name}}</td>

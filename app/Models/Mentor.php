@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Mentor extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected  $table = 'mentors';
+    protected $fillable
+        = [
+            'mentor_name',
+            'subject'
+        ];
+
     public function classroom()
     {
-        return $this->hasMany(Classroom::class,'classroom_id', 'id');
+        return $this->hasMany(Classroom::class);
     }
 }

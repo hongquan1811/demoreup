@@ -24,8 +24,8 @@ class ClassroomController extends Controller
                 ->orwhere('roof','LIKE',"%$search_infor")->get();
             return view('classroom.index',compact('index'));
         }
-        $index = Classroom::all();
-        return view('classroom.index',compact('index'));
+        $classrooms = Classroom::all();
+        return view('classroom.index',compact('classrooms'));
     }
 
     /**
@@ -47,6 +47,8 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
+        $classroom_input=\request()->classroom_name;
+        $clasroom_check =
         Classroom::insert([
             'classroom_name'=>$request->classroom_name,
             'mentor_id'=>$request->mentor_id,
