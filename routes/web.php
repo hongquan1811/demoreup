@@ -15,3 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('admin/login', [\App\Http\Controllers\LoginController::class, 'index']);
 Route::post('admin/login/store', [\App\Http\Controllers\LoginController::class, 'store']);
+
+Route::middleware(['auth'])->group(function()
+{
+    Route::prefix('admin')->group(function()
+    {
+        Route::resource('students', \App\Http\Controllers\StudentController::class);
+        Route::resource('classrooms', \App\Http\Controllers\ClassroomController::class);
+        Route::resource('mentors', \App\Http\Controllers\MentorController::class);
+        Route::resource('schools', \App\Http\Controllers\SchoolController::class);
+    });
+});
