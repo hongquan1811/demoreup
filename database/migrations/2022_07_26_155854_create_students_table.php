@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('student_name');
             $table->integer('school_id');
             $table->integer('classroom_id');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('description');
             $table->timestamps();
         });

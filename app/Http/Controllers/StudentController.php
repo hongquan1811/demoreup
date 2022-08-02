@@ -23,9 +23,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $classroom = Classroom::get();
-        $school = School::get();
-        return view('student.add', compact('classroom', 'school'));
+        $classrooms = Classroom::get();
+        $schools = School::get();
+        return view('student.add', compact('classrooms', 'schools'));
     }
 
     /**
@@ -55,14 +55,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $show = Student::where('id', '=', $id)->first();
-        $school = School::get();
-        $classroom = Classroom::get();
-        $classroom_show = $show->classroom;
-        $school_show = $show->school;
-        return view('student.show',
-            compact('show', 'school', 'classroom', 'classroom_show',
-                'school_show'));
+        $showStudent = Student::where('id', '=', $id)->first();
+        return view('student.show', compact('showStudent'));
     }
 
     /**
@@ -74,14 +68,10 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $edit = Student::where('id', '=', $id)->first();
-        $school = School::get();
-        $classroom = Classroom::get();
-        $classroom_show = $edit->classroom;
-        $school_show = $edit->school;
-        return view('student.edit',
-            compact('edit', 'school', 'classroom', 'classroom_show',
-                'school_show'));
+        $editStudent = Student::where('id', '=', $id)->first();
+        $schools = School::get();
+        $classrooms = Classroom::get();
+        return view('student.edit', compact('editStudent', 'schools', 'classrooms'));
     }
 
     /**
@@ -94,10 +84,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Student::where('id', '=', $id)->update($request->except([
-            '_token',
-            '_method'
-        ]), $request->$id);
+        Student::where('id', '=', $id)->update($request->except(['_token', '_method']), $request->$id);
         $notification = [
             'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',

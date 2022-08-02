@@ -81,10 +81,7 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        School::where('id', '=', $id)->update($request->except([
-            '_token',
-            '_method'
-        ]), $request->$id);
+        School::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
         $notification = [
             'message' => __('text_message.school.update'),
             'alert-type' => 'success',

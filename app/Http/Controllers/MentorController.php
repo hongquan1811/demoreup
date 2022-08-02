@@ -57,8 +57,8 @@ class MentorController extends Controller
      */
     public function show($id)
     {
-        $show = Mentor::where('id', '=', $id)->first();
-        return view('mentor.show', compact('show'));
+        $showMentor= Mentor::where('id', '=', $id)->first();
+        return view('mentor.show', compact('showMentor'));
     }
 
     /**
@@ -70,8 +70,8 @@ class MentorController extends Controller
      */
     public function edit($id)
     {
-        $edit = Mentor::where('id', '=', $id)->first();
-        return view('mentor.edit', compact('edit'));
+        $editMentor = Mentor::where('id', '=', $id)->first();
+        return view('mentor.edit', compact('editMentor'));
     }
 
     /**

@@ -3,24 +3,24 @@
     List Classes
 @endsection
 @section('content')
-    <form action="{{ route('classrooms.show', $show->id) }}" method="POST">
+    <form action="{{ route('classrooms.show', $showClassroom->id) }}" method="POST">
         @csrf
         <br/>
         @method('PUT')
-        <input type="hidden" name="id" value="{{$show->id}}">
+        <input type="hidden" name="id" value="{{$showClassroom->id}}">
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="classroom_name" value="{{$show->classroom_name}}" readonly>
+            <input type="text" class="form-control" name="classroom_name" value="{{$showClassroom->classroom_name}}" readonly>
         </div>
         <div class="mb-3">
             <label class="form-label">Danh mục giáo viên</label>
             <select class="form-control" name="mentor_id" id="" readonly>
-                <option value="{{$mentor_show->id}}" selected=>{{$mentor_show->mentor_name}}</option>
+                <option value="{{$showClassroom->mentor->id}}" selected=>{{$showClassroom->mentor->mentor_name}}</option>
             </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Roof</label>
-            <input type="text" name="roof" class="form-control" value="{{$show->roof}}" readonly>
+            <input type="text" name="roof" class="form-control" value="{{$showClassroom->roof}}" readonly>
         </div>
     </form>
 @endsection

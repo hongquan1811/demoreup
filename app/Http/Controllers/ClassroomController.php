@@ -27,8 +27,8 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        $mentor = Mentor::get();
-        return view('classroom.add', compact('mentor'));
+        $mentors = Mentor::get();
+        return view('classroom.add', compact('mentors'));
     }
 
     /**
@@ -40,12 +40,6 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-//        $classroom_input = \request()->classroom_name;
-//        $clasroom_check = Classroom::insert([
-//            'classroom_name' => $request->classroom_name,
-//            'mentor_id' => $request->mentor_id,
-//            'roof' => $request->roof,
-//        ]);
         Classroom::create($request->all());
         $notification = [
             'message' => __('text_message.classroom.create'),
@@ -63,10 +57,8 @@ class ClassroomController extends Controller
      */
     public function show($id)
     {
-        $show = Classroom::where('id', $id)->first();
-        $mentor = Mentor::get();
-        $mentor_show = $show->mentor;
-        return view('classroom.show', compact('show', 'mentor', 'mentor_show'));
+        $showClassroom = Classroom::where('id', $id)->first();
+        return view('classroom.show', compact('showClassroom'));
     }
 
     /**
@@ -78,10 +70,9 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-        $edit = Classroom::where('id', '=', $id)->first();
-        $mentor = Mentor::get();
-        $mentor_show = $edit->mentor;
-        return view('classroom.edit', compact('edit', 'mentor', 'mentor_show'));
+        $editClassroom = Classroom::where('id', '=', $id)->first();
+        $mentors = Mentor::get();
+        return view('classroom.edit', compact('editClassroom','mentors'));
     }
 
     /**
@@ -94,10 +85,7 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Classroom::where('id', '=', $id)->update($request->except([
-            '_token',
-            '_method'
-        ]), $request->$id);
+        Classroom::where('id', '=', $id)->update($request->except(['_token', '_method']), $request->$id);
         $notification = [
             'message' => __('text_message.classroom.update'),
             'alert-type' => 'success',

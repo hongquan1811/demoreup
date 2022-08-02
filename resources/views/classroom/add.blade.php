@@ -13,8 +13,8 @@
             <label>Giáo Viên</label>
             <select class="form-control" name="mentor_id" id="">
                 <option value="0">Danh muc giao vien</option>
-                @foreach($mentor as $mentors)
-                    <option value="{{$mentors->id}}"> {{$mentors->mentor_name}} </option>
+                @foreach($mentors as $mentor)
+                    <option value="{{$mentor->id}}"> {{$mentor->mentor_name}} </option>
                 @endforeach
             </select>
         </div>

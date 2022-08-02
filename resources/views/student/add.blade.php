@@ -10,8 +10,8 @@
             <label>lop hoc </label>
             <select class="form-control" name="classroom_id" id="">
                 <option value="0">Danh muc lop hoc</option>
-                @foreach($classroom as $classrooms)
-                    <option value="{{$classrooms->id}}"> {{$classrooms->classroom_name}}</option>
+                @foreach($classrooms as $classroom)
+                    <option value="{{$classroom->id}}"> {{$classroom->classroom_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -19,8 +19,8 @@
             <label>truong hoc</label>
             <select class="form-control" name="school_id" id="">
                 <option value="0">Danh muc truong</option>
-                @foreach($school as $schools)
-                    <option value="{{$schools->id}}"> {{$schools->school_name}}</option>
+                @foreach($schools as $school)
+                    <option value="{{$school->id}}"> {{$school->school_name}}</option>
                 @endforeach
             </select>
         </div>
