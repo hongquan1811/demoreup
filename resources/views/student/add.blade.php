@@ -7,18 +7,18 @@
             <input type="text" class="form-control" name="student_name">
         </div>
         <div class="form-group">
-            <label>lop hoc </label>
+            <label>Classroom</label>
             <select class="form-control" name="classroom_id" id="">
-                <option value="0">Danh muc lop hoc</option>
+                <option value="0">Classroom List</option>
                 @foreach($classrooms as $classroom)
                     <option value="{{$classroom->id}}"> {{$classroom->classroom_name}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
-            <label>truong hoc</label>
+            <label>School</label>
             <select class="form-control" name="school_id" id="">
-                <option value="0">Danh muc truong</option>
+                <option value="0">School List</option>
                 @foreach($schools as $school)
                     <option value="{{$school->id}}"> {{$school->school_name}}</option>
                 @endforeach

@@ -13,7 +13,7 @@
             <input type="text" class="form-control" name="classroom_name" value="{{$showClassroom->classroom_name}}" readonly>
         </div>
         <div class="mb-3">
-            <label class="form-label">Danh mục giáo viên</label>
+            <label class="form-label">Mentor List</label>
             <select class="form-control" name="mentor_id" id="" readonly>
                 <option value="{{$showClassroom->mentor->id}}" selected=>{{$showClassroom->mentor->mentor_name}}</option>
             </select>

@@ -10,18 +10,19 @@
             <input type="text" class="form-control" name="classroom_name">
         </div>
         <div class="form-group">
-            <label>Giáo Viên</label>
+            <label>Mentor</label>
             <select class="form-control" name="mentor_id" id="">
-                <option value="0">Danh muc giao vien</option>
+                <option value="0">Mentor List</option>
                 @foreach($mentors as $mentor)
                     <option value="{{$mentor->id}}"> {{$mentor->mentor_name}} </option>
                 @endforeach
             </select>
         </div>
-
-        <label class="form-label">Roof</label>
-        <input type="text" name="roof" class="form-control">
+        <div class="form-group">
+            <label class="form-label">Roof</label>
+            <input type="text" name="roof" class="form-control">
         </div>
+
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

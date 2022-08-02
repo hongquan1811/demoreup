@@ -71,7 +71,8 @@ class StudentController extends Controller
         $editStudent = Student::where('id', '=', $id)->first();
         $schools = School::get();
         $classrooms = Classroom::get();
-        return view('student.edit', compact('editStudent', 'schools', 'classrooms'));
+        return view('student.edit',
+            compact('editStudent', 'schools', 'classrooms'));
     }
 
     /**
@@ -84,7 +85,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Student::where('id', '=', $id)->update($request->except(['_token', '_method']), $request->$id);
+        Student::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
         $notification = [
             'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',

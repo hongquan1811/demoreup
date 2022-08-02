@@ -37,7 +37,7 @@
             <input type="text" class="form-control" name="phone" value="{{$editStudent->phone}}">
         </div>
         <div class="mb-3">
-            <label class="form-label">description</label>
+            <label class="form-label">Description</label>
             <input type="text" class="form-control" name="description" value="{{$editStudent->description}}">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

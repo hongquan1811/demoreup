@@ -13,7 +13,7 @@
             <input type="text" class="form-control" name="classroom_name" value="{{$editClassroom->classroom_name}}">
         </div>
         <div class="mb-3">
-            <label class="form-label">Danh mục giáo viên</label>
+            <label class="form-label">Mentor List</label>
             <select class="form-control" name="mentor_id" id="">
                 <option value="{{$editClassroom->mentor->id}}" selected=>{{$editClassroom->mentor->mentor_name}}</option>
                 @foreach($mentors as $mentor)

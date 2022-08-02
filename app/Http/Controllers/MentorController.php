@@ -17,7 +17,6 @@ class MentorController extends Controller
     {
         $mentors = Mentor::orderBy('id', 'ASC')->search()->get();
         return view('mentor.index', compact('mentors'));
-
     }
 
     /**
@@ -57,7 +56,7 @@ class MentorController extends Controller
      */
     public function show($id)
     {
-        $showMentor= Mentor::where('id', '=', $id)->first();
+        $showMentor = Mentor::where('id', '=', $id)->first();
         return view('mentor.show', compact('showMentor'));
     }
 
@@ -84,10 +83,7 @@ class MentorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Mentor::where('id', '=', $id)->update($request->except([
-            '_token',
-            '_method'
-        ]), $request->$id);
+        Mentor::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
         $notification = [
             'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',
