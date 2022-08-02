@@ -10,8 +10,8 @@ class School extends Model
     use HasFactory;
 
     protected $table = 'schools';
-    protected $fillable
-        = [
+    protected $fillable =
+        [
             'school_name',
             'address'
         ];
