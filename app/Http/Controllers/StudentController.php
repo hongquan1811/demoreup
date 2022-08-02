@@ -12,18 +12,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $search_infor = \request()->search;
-        if ($search_infor != "") {
-            $index = Student::where('student_name', 'LIKE', "%$search_infor%")
-                ->join('classrooms', 'students.classroom_id', '=', 'classrooms.id')
-                ->orwhere('classrooms.classroom_name', 'LIKE', "%$search_infor%")
-                ->join('schools', 'students.school_id', '=', 'schools.id')
-                ->orwhere('schools.school_name', 'LIKE', "%$search_infor%")
-                ->orwhere('phone', 'LIKE', "%$search_infor%")
-                ->orwhere('description', 'LIKE', "%$search_infor%")->get();
-            return view('student.index', compact('index'));
-        }
-        $students = Student::all();
+        $students = Student::orderBy('classroom_id', 'ASC')->search()->get();
         return view('student.index', compact('students'));
     }
 
@@ -51,7 +40,7 @@ class StudentController extends Controller
         Student::create($request->all());
 
         $notification = [
-            'message' => 'Add Student Successfully',
+            'message' => __('text_message.mentor.create'),
             'alert-type' => 'success',
         ];
         return redirect()->route('students.index')->with($notification);
@@ -110,7 +99,7 @@ class StudentController extends Controller
             '_method'
         ]), $request->$id);
         $notification = [
-            'message' => 'Update Student Successfully',
+            'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',
         ];
 
@@ -128,7 +117,7 @@ class StudentController extends Controller
     {
         Student::destroy($id);
         $notification = [
-            'message' => 'Delete Student Successfully',
+            'message' => __('text_message.mentor.destroy'),
             'alert-type' => 'success',
         ];
         return redirect()->route('students.index')->with($notification);

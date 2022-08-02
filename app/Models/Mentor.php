@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mentor extends Model
 {
     use HasFactory;
-    protected  $table = 'mentors';
+
+    protected $table = 'mentors';
     protected $fillable
         = [
             'mentor_name',
@@ -18,5 +19,14 @@ class Mentor extends Model
     public function classroom()
     {
         return $this->hasMany(Classroom::class);
+    }
+
+    public function scopeSearch($query)
+    {
+        if ($mentor_infor = \request()->search) {
+            $query = $query->where('mentor_name', 'LIKE', "%$mentor_infor%")
+                ->orWhere('subject', 'LIKE', "%$mentor_infor%");
+        }
+        return $query;
     }
 }

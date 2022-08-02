@@ -1,4 +1,3 @@
-
 @extends('display.home')
 @section('title')
     List Classes
@@ -6,7 +5,7 @@
 @section('content')
     <form action="{{ route('classrooms.show', $show->id) }}" method="POST">
         @csrf
-        <br />
+        <br/>
         @method('PUT')
         <input type="hidden" name="id" value="{{$show->id}}">
         <div class="mb-3">
@@ -21,8 +20,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Roof</label>
-            <input type="text" name="roof"  class="form-control" value="{{$show->roof}}" readonly>
+            <input type="text" name="roof" class="form-control" value="{{$show->roof}}" readonly>
         </div>
-        {{--        <button type="submit" class="btn btn-primary">Submit</button>--}}
     </form>
 @endsection

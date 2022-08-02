@@ -20,8 +20,10 @@
         </div>
         <div class="input-group mb-3">
             <form action="{{ route('schools.index') }}" method="get" style="display: inline-block">
-                <input type="search" class="form-control" name="search" style="margin-left: 1300px" placeholder="Search here">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;" >Search</button>
+                <input type="search" class="form-control" name="search" style="margin-left: 1300px"
+                       placeholder="Search here">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search
+                </button>
             </form>
         </div>
         @php
@@ -39,7 +41,8 @@
                     <form action="{{route('schools.edit', $school->id)}}" method="get" style="display: inline-block">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
-                    <form action="{{route('schools.destroy', $school->id)}}" method="post" onclick="myFunction()" style="display: inline-block">
+                    <form action="{{route('schools.destroy', $school->id)}}" method="post" onclick="myFunction()"
+                          style="display: inline-block">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -55,7 +58,6 @@
                 event.preventDefault();
         }
     </script>
-
 @endsection
 
 

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
 <style>
-    .navbar-nav .nav-item  .nav-link.custom {
+    .navbar-nav .nav-item .nav-link.custom {
         color: #409EFF;
         font-weight: bold;
     }

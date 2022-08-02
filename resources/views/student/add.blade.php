@@ -9,7 +9,7 @@
         <div class="form-group">
             <label>lop hoc </label>
             <select class="form-control" name="classroom_id" id="">
-                <option value="0">Danh muc lop hoc </option>
+                <option value="0">Danh muc lop hoc</option>
                 @foreach($classroom as $classrooms)
                     <option value="{{$classrooms->id}}"> {{$classrooms->classroom_name}}</option>
                 @endforeach
@@ -29,8 +29,8 @@
             <input type="text" class="form-control" name="phone">
         </div>
         <div class="mb-3">
-            <label  class="form-label">Description</label>
-            <input type="text" name="description"  class="form-control"></input>
+            <label class="form-label">Description</label>
+            <input type="text" name="description" class="form-control"></input>
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -5,7 +5,7 @@
 @section('content')
     <form action="{{ route('mentors.update', $edit->id) }}" method="POST">
         @csrf
-        <br />
+        <br/>
         @method('PUT')
         <input type="hidden" name="id" value="{{$edit->id}}">
         <div class="mb-3">
@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Subject</label>
-            <input type="text" name="subject"  class="form-control" value="{{$edit->subject}}">
+            <input type="text" name="subject" class="form-control" value="{{$edit->subject}}">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

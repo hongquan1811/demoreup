@@ -5,7 +5,7 @@
 @section('content')
     <form action="{{ route('students.update', $edit->id) }}" method="POST">
         @csrf
-        <br />
+        <br/>
         @method('PUT')
         <input type="hidden" name="id" value="{{$edit->id}}">
         <div class="mb-3">
@@ -34,11 +34,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Phone</label>
-            <input type="text"  class="form-control" name="phone" value="{{$edit->phone}}">
+            <input type="text" class="form-control" name="phone" value="{{$edit->phone}}">
         </div>
         <div class="mb-3">
             <label class="form-label">description</label>
-            <input type="text"  class="form-control" name="description" value="{{$edit->description}}">
+            <input type="text" class="form-control" name="description" value="{{$edit->description}}">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

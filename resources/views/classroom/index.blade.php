@@ -20,9 +20,11 @@
             </a>
         </div>
         <div class="input-group mb-3">
-            <form action="{{ route('classrooms.index') }}" method="get" style="display: inline-block">
-                <input type="search" class="form-control" name="search" style="margin-left: 1300px" placeholder="Search here" value="">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;"  >Search</button>
+            <form action="" style="display: inline-block">
+                <input type="search" class="form-control" name="search" style="margin-left: 1300px"
+                       placeholder="Search here" value="">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search
+                </button>
             </form>
         </div>
         @php
@@ -35,13 +37,16 @@
                 <td>{{$classroom->mentor->mentor_name}}</td>
                 <td>{{$classroom->roof}}</td>
                 <td>
-                    <form action="{{route('classrooms.show', $classroom->id)}}" method="get" style="display: inline-block">
+                    <form action="{{route('classrooms.show', $classroom->id)}}" method="get"
+                          style="display: inline-block">
                         <button type="submit" class="btn btn-primary">View</button>
                     </form>
-                    <form action="{{route('classrooms.edit', $classroom->id)}}" method="get" style="display: inline-block">
+                    <form action="{{route('classrooms.edit', $classroom->id)}}" method="get"
+                          style="display: inline-block">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
-                    <form action="{{route('classrooms.destroy', $classroom->id)}}" method="post" onclick="myFunction()" style="display: inline-block">
+                    <form action="{{route('classrooms.destroy', $classroom->id)}}" method="post" onclick="myFunction()"
+                          style="display: inline-block">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -57,7 +62,6 @@
                 event.preventDefault();
         }
     </script>
-
 @endsection
 
 

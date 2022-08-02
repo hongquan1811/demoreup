@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,11 +54,11 @@
                     <!-- left column -->
                     <div class="col-md-12">
                         <!-- jquery validation -->
-{{--                        <div class="card card-primary">--}}
-{{--                            <div class="card-header">--}}
-{{--                                <h3 class="card-title">{{$title}}</h3>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="card card-primary">--}}
+                        {{--                            <div class="card-header">--}}
+                        {{--                                <h3 class="card-title">{{$title}}</h3>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                         @yield('content')
                     </div>
                     <!--/.col (left) -->
@@ -75,12 +74,12 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-{{--    <footer class="main-footer">--}}
-{{--        <div class="float-right d-none d-sm-block">--}}
-{{--            <b>Version</b> 3.1.0--}}
-{{--        </div>--}}
-{{--        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.--}}
-{{--    </footer>--}}
+    {{--    <footer class="main-footer">--}}
+    {{--        <div class="float-right d-none d-sm-block">--}}
+    {{--            <b>Version</b> 3.1.0--}}
+    {{--        </div>--}}
+    {{--        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.--}}
+    {{--    </footer>--}}
 
 </div>
 <!-- ./wrapper -->

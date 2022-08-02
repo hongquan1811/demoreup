@@ -19,8 +19,8 @@
             </select>
         </div>
 
-        <label  class="form-label">Roof</label>
-        <input type="text" name="roof"  class="form-control">
+        <label class="form-label">Roof</label>
+        <input type="text" name="roof" class="form-control">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -13,19 +13,11 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $search_infor= \request()->search;
-        if($search_infor!="")
-        {
-            $index = Classroom::where('classroom_name','LIKE',"%$search_infor%")
-                ->join('mentors','classrooms.mentor_id','=','mentors.id')
-                ->orwhere('mentors.mentor_name','LIKE',"%$search_infor%")
-                ->orwhere('roof','LIKE',"%$search_infor")->get();
-            return view('classroom.index',compact('index'));
-        }
-        $classrooms = Classroom::all();
-        return view('classroom.index',compact('classrooms'));
+        $classrooms = Classroom::orderBy('id', 'ASC')->search()->get();
+        return view('classroom.index', compact('classrooms'));
     }
 
     /**
@@ -42,20 +34,21 @@ class ClassroomController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $classroom_input=\request()->classroom_name;
-        $clasroom_check =
-        Classroom::insert([
-            'classroom_name'=>$request->classroom_name,
-            'mentor_id'=>$request->mentor_id,
-            'roof'=>$request->roof,
-        ]);
+//        $classroom_input = \request()->classroom_name;
+//        $clasroom_check = Classroom::insert([
+//            'classroom_name' => $request->classroom_name,
+//            'mentor_id' => $request->mentor_id,
+//            'roof' => $request->roof,
+//        ]);
+        Classroom::create($request->all());
         $notification = [
-            'message'    => 'Add Classroom Successfully',
+            'message' => __('text_message.classroom.create'),
             'alert-type' => 'success',
         ];
         return redirect()->route('classrooms.index')->with($notification);
@@ -64,43 +57,49 @@ class ClassroomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $show= Classroom::where('id',$id)->first();
-        $mentor=Mentor::get();
-        $mentor_show=$show->mentor;
-        return view('classroom.show',compact('show','mentor','mentor_show'));
+        $show = Classroom::where('id', $id)->first();
+        $mentor = Mentor::get();
+        $mentor_show = $show->mentor;
+        return view('classroom.show', compact('show', 'mentor', 'mentor_show'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $edit=Classroom::where('id','=',$id)->first();
-        $mentor=Mentor::get();
-        $mentor_show=$edit->mentor;
-        return view('classroom.edit',compact('edit','mentor','mentor_show'));
+        $edit = Classroom::where('id', '=', $id)->first();
+        $mentor = Mentor::get();
+        $mentor_show = $edit->mentor;
+        return view('classroom.edit', compact('edit', 'mentor', 'mentor_show'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        Classroom::where('id','=',$id)->update($request->except(['_token', '_method']),$request->$id);
+        Classroom::where('id', '=', $id)->update($request->except([
+            '_token',
+            '_method'
+        ]), $request->$id);
         $notification = [
-            'message'    => 'Update Classroom Successfully',
+            'message' => __('text_message.classroom.update'),
             'alert-type' => 'success',
         ];
 
@@ -110,7 +109,8 @@ class ClassroomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -118,7 +118,7 @@ class ClassroomController extends Controller
         Classroom::find($id)->students()->delete();
         Classroom::destroy($id);
         $notification = [
-            'message'    => 'Delete Classroom Successfully',
+            'message' => __('text_message.classroom.destroy'),
             'alert-type' => 'success',
         ];
         return redirect()->route('classrooms.index')->with($notification);
