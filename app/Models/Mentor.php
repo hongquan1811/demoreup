@@ -10,8 +10,7 @@ class Mentor extends Model
     use HasFactory;
 
     protected $table = 'mentors';
-    protected $fillable =
-        [
+    protected $fillable = [
             'mentor_name',
             'subject'
         ];
@@ -21,12 +20,4 @@ class Mentor extends Model
         return $this->hasMany(Classroom::class);
     }
 
-    public function scopeSearch($query)
-    {
-        if ($mentor_infor = \request()->search) {
-            $query = $query->where('mentor_name', 'LIKE', "%$mentor_infor%")
-                ->orWhere('subject', 'LIKE', "%$mentor_infor%");
-        }
-        return $query;
-    }
 }

@@ -12,20 +12,23 @@ use App\Repositories\SchoolRepositoryInterface;
 use App\Repositories\StudentRepositoyInterface;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
-        //
+        $this->app->bind(SchoolRepositoryInterface::class, SchoolRepository::class);
+        $this->app->bind(ClassroomRepositoryInterface::class, ClassroomRepository::class);
+        $this->app->bind(MentorRepositoryInterface::class, MentorRepository::class);
+        $this->app->bind(StudentRepositoyInterface::class, StudentRepository::class);
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */

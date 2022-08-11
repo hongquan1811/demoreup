@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SchoolRequest;
 use App\Models\School;
+use App\Services\SchoolService;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
@@ -12,9 +14,16 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public SchoolService $schoolService;
+
+    public function __construct(SchoolService $schoolService)
+    {
+        $this->schoolService= $schoolService;
+    }
+
     public function index()
     {
-        $schools = School::orderBy('id', 'ASC')->search()->get();
+        $schools = $this->schoolService->getAllSchool();
         return view('school.index', compact('schools'));
     }
 
@@ -35,14 +44,15 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
-        School::create($request->all());
+        $this->schoolService->createSchool($request->all());
         $notification = [
             'message' => __('text_message.school.create'),
             'alert-type' => 'success',
         ];
         return redirect()->route('schools.index')->with($notification);
+
     }
 
     /**
@@ -54,7 +64,7 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        $show = School::where('id', '=', $id)->first();
+        $show = $this->schoolService->showSchool($id);
         return view('school.show', compact('show'));
     }
 
@@ -67,7 +77,7 @@ class SchoolController extends Controller
      */
     public function edit($id)
     {
-        $edit = School::where('id', '=', $id)->first();
+        $edit = $this->schoolService->showSchool($id);
         return view('school.edit', compact('edit'));
     }
 
@@ -75,13 +85,12 @@ class SchoolController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SchoolRequest $request, $id)
     {
-        School::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
+        $this->schoolService->updateSchool($request->all(), $id);
         $notification = [
             'message' => __('text_message.school.update'),
             'alert-type' => 'success',
@@ -99,7 +108,7 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-        School::destroy($id);
+        $this->schoolService->deleteSchool($id);
         $notification = [
             'message' => __('text_message.school.destroy'),
             'alert-type' => 'success',

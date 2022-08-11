@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassroomRequest;
 use App\Models\Classroom;
 use App\Models\Mentor;
+use App\Services\ClassroomService;
+use App\Services\MentorService;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -13,10 +16,18 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public ClassroomService $classroomService;
+    public MentorService $mentorService;
+
+    public function __construct(ClassroomService $classroomService, MentorService $mentorService)
+    {
+        $this->classroomService = $classroomService;
+        $this->mentorService = $mentorService;
+    }
 
     public function index()
     {
-        $classrooms = Classroom::orderBy('id', 'ASC')->search()->get();
+        $classrooms = $this->classroomService->getAllClassroom();
         return view('classroom.index', compact('classrooms'));
     }
 
@@ -27,7 +38,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        $mentors = Mentor::get();
+        $mentors = $this->mentorService->getAllMentor();
         return view('classroom.add', compact('mentors'));
     }
 
@@ -38,9 +49,9 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassroomRequest $request)
     {
-        Classroom::create($request->all());
+        $this->classroomService->createClassroom($request->all());
         $notification = [
             'message' => __('text_message.classroom.create'),
             'alert-type' => 'success',
@@ -57,7 +68,7 @@ class ClassroomController extends Controller
      */
     public function show($id)
     {
-        $showClassroom = Classroom::where('id', $id)->first();
+        $showClassroom = $this->classroomService->showClassroom($id);
         return view('classroom.show', compact('showClassroom'));
     }
 
@@ -70,8 +81,8 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-        $editClassroom = Classroom::where('id', '=', $id)->first();
-        $mentors = Mentor::get();
+        $editClassroom = $this->classroomService->showClassroom($id);
+        $mentors = $this->mentorService->getAllMentor();
         return view('classroom.edit', compact('editClassroom','mentors'));
     }
 
@@ -83,9 +94,9 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClassroomRequest $request, $id)
     {
-        Classroom::where('id', '=', $id)->update($request->except(['_token', '_method']), $request->$id);
+        $this->classroomService->updateClassroom($request->all(), $id);
         $notification = [
             'message' => __('text_message.classroom.update'),
             'alert-type' => 'success',
@@ -103,8 +114,7 @@ class ClassroomController extends Controller
      */
     public function destroy($id)
     {
-        Classroom::find($id)->students()->delete();
-        Classroom::destroy($id);
+        $this->classroomService->deleteClassroom($id);
         $notification = [
             'message' => __('text_message.classroom.destroy'),
             'alert-type' => 'success',

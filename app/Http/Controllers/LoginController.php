@@ -26,7 +26,7 @@ class LoginController extends Controller
             'password' => $request->input('password')
         ], $request->input('remember'))
         ) {
-            return redirect()->route('mentors.index');
+            return redirect()->route('students.index');
         }
         Session::flash('error', "Email hoặc mật khẩu không đúng");
         return redirect()->back();

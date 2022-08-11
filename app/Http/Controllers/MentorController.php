@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MentorRequest;
+use App\Services\MentorService;
 use Illuminate\Http\Request;
 use App\Models\Mentor;
 
 class MentorController extends Controller
 {
+    public MentorService $mentorService;
+
+    public function __construct(MentorService $mentorService)
+    {
+        $this->mentorService = $mentorService;
+    }
 
     /**
      * Display a listing of the resource.
@@ -15,7 +23,7 @@ class MentorController extends Controller
      */
     public function index()
     {
-        $mentors = Mentor::orderBy('id', 'ASC')->search()->get();
+        $mentors = $this->mentorService->getAllMentor();
         return view('mentor.index', compact('mentors'));
     }
 
@@ -36,9 +44,9 @@ class MentorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MentorRequest $request)
     {
-        Mentor::create($request->all());
+        $this->mentorService->createMentor($request->all());
 
         $notification = [
             'message' => __('text_message.mentor.create'),
@@ -56,7 +64,7 @@ class MentorController extends Controller
      */
     public function show($id)
     {
-        $showMentor = Mentor::where('id', '=', $id)->first();
+        $showMentor=$this->mentorService->showMentor($id);
         return view('mentor.show', compact('showMentor'));
     }
 
@@ -69,7 +77,7 @@ class MentorController extends Controller
      */
     public function edit($id)
     {
-        $editMentor = Mentor::where('id', '=', $id)->first();
+        $editMentor = $this->mentorService->showMentor($id);
         return view('mentor.edit', compact('editMentor'));
     }
 
@@ -81,9 +89,9 @@ class MentorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MentorRequest $request, $id)
     {
-        Mentor::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
+        $this->mentorService->updateMentor($request->all(), $id);
         $notification = [
             'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',
@@ -101,7 +109,7 @@ class MentorController extends Controller
      */
     public function destroy($id)
     {
-        Mentor::destroy($id);
+        $this->mentorService->deleteMentor($id);
         $notification = [
             'message' => __('text_message.mentor.destroy'),
             'alert-type' => 'success',

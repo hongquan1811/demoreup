@@ -2,17 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
 use App\Models\Classroom;
 use App\Models\Mentor;
 use App\Models\School;
 use App\Models\Student;
+use App\Services\ClassroomService;
+use App\Services\MentorService;
+use App\Services\SchoolService;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    protected SchoolService $schoolService;
+    protected ClassroomService $classroomService;
+    protected MentorService $mentorService;
+    protected StudentService $studentService;
+
+    public function __construct(
+        SchoolService $schoolService,
+        ClassroomService $classroomService,
+        MentorService $mentorService,
+        StudentService $studentService
+    ) {
+        $this->schoolService = $schoolService;
+        $this->classroomService = $classroomService;
+        $this->mentorService = $mentorService;
+        $this->studentService = $studentService;
+    }
+
     public function index()
     {
-        $students = Student::orderBy('classroom_id', 'ASC')->search()->get();
+        $students = $this->studentService->getAllStudent();
         return view('student.index', compact('students'));
     }
 
@@ -23,8 +45,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $classrooms = Classroom::get();
-        $schools = School::get();
+        $classrooms = $this->classroomService->getAllClassroom();
+        $schools = $this->schoolService->getAllSchool();
         return view('student.add', compact('classrooms', 'schools'));
     }
 
@@ -35,9 +57,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        Student::create($request->all());
+        $this->studentService->createStudent($request->all());
 
         $notification = [
             'message' => __('text_message.mentor.create'),
@@ -55,7 +77,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $showStudent = Student::where('id', '=', $id)->first();
+        $showStudent = $this->studentService->showStudent($id);
         return view('student.show', compact('showStudent'));
     }
 
@@ -68,9 +90,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $editStudent = Student::where('id', '=', $id)->first();
-        $schools = School::get();
-        $classrooms = Classroom::get();
+        $editStudent = $this->studentService->showStudent($id);
+        $schools = $this->schoolService->getAllSchool();
+        $classrooms = $this->classroomService->getAllClassroom();
         return view('student.edit',
             compact('editStudent', 'schools', 'classrooms'));
     }
@@ -83,9 +105,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
-        Student::where('id', '=', $id)->update($request->except(['_token','_method']), $request->$id);
+        $this->studentService->updateStudent($request->all(), $id);
         $notification = [
             'message' => __('text_message.mentor.update'),
             'alert-type' => 'success',
@@ -103,7 +125,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        Student::destroy($id);
+        $this->studentService->deleteStudent($id);
         $notification = [
             'message' => __('text_message.mentor.destroy'),
             'alert-type' => 'success',

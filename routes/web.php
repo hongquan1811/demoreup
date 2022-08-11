@@ -19,7 +19,7 @@ Route::post('admin/login/store', [\App\Http\Controllers\LoginController::class, 
 Route::middleware(['auth'])->group(function()
 {
     Route::prefix('admin')->group(function()
-    {
+   {
         Route::resource('students', \App\Http\Controllers\StudentController::class);
         Route::resource('classrooms', \App\Http\Controllers\ClassroomController::class);
         Route::resource('mentors', \App\Http\Controllers\MentorController::class);

@@ -12,7 +12,7 @@
         <div class="form-group">
             <label>Mentor</label>
             <select class="form-control" name="mentor_id" id="">
-                <option value="0">Mentor List</option>
+                <option value="">Mentor List</option>
                 @foreach($mentors as $mentor)
                     <option value="{{$mentor->id}}"> {{$mentor->mentor_name}} </option>
                 @endforeach

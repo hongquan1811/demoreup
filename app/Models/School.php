@@ -21,12 +21,12 @@ class School extends Model
         return $this->hasMany(Student::class);
     }
 
-    public function scopeSearch($query)
-    {
-        if ($school_infor = \request()->search) {
-            $query = $query->where('school_name', 'LIKE', "%$school_infor%")
-                ->orWhere('address', 'LIKE', "%$school_infor%");
-        }
-        return $query;
-    }
+//    public function scopeSearch($query)
+//    {
+//        if ($school_infor = \request()->search) {
+//            $query = $query->where('school_name', 'LIKE', "%$school_infor%")
+//                ->orWhere('address', 'LIKE', "%$school_infor%");
+//        }
+//        return $query;
+//    }
 }
