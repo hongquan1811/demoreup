@@ -34,8 +34,14 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = $this->studentService->getAllStudent();
-        return view('student.index', compact('students'));
+        if(isset($_GET['search'])){
+            $students_search = $_GET['search'];
+            $students =  $this->studentService->searchStudent($students_search);
+        }
+        else {
+            $students = $this->studentService->getAllStudent();
+        }
+        return view('student.index',compact('students'));
     }
 
     /**
@@ -57,7 +63,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentRequest $request)
+    public function store(Request $request)
     {
         $this->studentService->createStudent($request->all());
 

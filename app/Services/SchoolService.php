@@ -9,17 +9,14 @@ class SchoolService
 {
     private SchoolRepositoryInterface $schoolRepositoryInterface;
 
-    public function __construct(SchoolRepositoryInterface $schoolRepositoryInterface)
-    {
+    public function __construct(
+        SchoolRepositoryInterface $schoolRepositoryInterface
+    ) {
         $this->schoolRepositoryInterface = $schoolRepositoryInterface;
     }
 
     public function getAllSchool()
     {
-        $schoolSearch = \request()->search;
-        if($schoolSearch != ""){
-            return $this->schoolRepositoryInterface->searchSchool($schoolSearch);
-        }
         return $this->schoolRepositoryInterface->getAll();
     }
 
@@ -41,5 +38,10 @@ class SchoolService
     public function deleteSchool($id)
     {
         return $this->schoolRepositoryInterface->delete($id);
+    }
+
+    public function searchSchool($data)
+    {
+        return $this->schoolRepositoryInterface->searchSchool($data);
     }
 }

@@ -24,11 +24,11 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_name' => 'required',
-            'school_id' => 'required',
-            'classroom_id' => 'required',
-            'phone' => 'required',
-            'description' => 'required'
+            'student_name' => 'bail|required|max:255',
+            'school_id' => 'bail|required',
+            'classroom_id' => 'bail|required',
+            'phone' => 'bail|required|max:255',
+            'description' => 'bail|required|max:255'
         ];
     }
 

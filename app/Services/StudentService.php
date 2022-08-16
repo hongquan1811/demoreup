@@ -15,10 +15,6 @@ class StudentService
 
     public function getAllStudent()
     {
-        $dataSearch = \request()->search;
-        if($dataSearch != ""){
-            return $this->studentRepositoyInterface->searchStudent($dataSearch);
-        }
         return $this->studentRepositoyInterface->getAll();
     }
 
@@ -40,5 +36,10 @@ class StudentService
     public function deleteStudent($id)
     {
         return $this->studentRepositoyInterface->delete($id);
+    }
+
+    public function searchStudent($data)
+    {
+        return $this->studentRepositoyInterface->searchStudent($data);
     }
 }

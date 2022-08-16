@@ -24,9 +24,9 @@ class ClassroomRequest extends FormRequest
     public function rules()
     {
         return [
-            'classroom_name' => 'required',
-            'mentor_id' => 'required',
-            'roof' => 'required'
+            'classroom_name' => 'bail|required|max:255',
+            'mentor_id' => 'bail|required|max:255',
+            'roof' => 'bail|required|max:255'
         ];
     }
 

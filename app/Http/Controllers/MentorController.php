@@ -23,8 +23,14 @@ class MentorController extends Controller
      */
     public function index()
     {
-        $mentors = $this->mentorService->getAllMentor();
-        return view('mentor.index', compact('mentors'));
+        if(isset($_GET['search'])){
+            $mentors_search = $_GET['search'];
+            $mentors =  $this->mentorService->searchMentor($mentors_search);
+        }
+        else {
+            $mentors= $this->mentorService->getAllMentor();
+        }
+        return view('mentor.index',compact('mentors'));
     }
 
     /**
@@ -44,7 +50,7 @@ class MentorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(MentorRequest $request)
+    public function store(Request $request)
     {
         $this->mentorService->createMentor($request->all());
 
@@ -64,7 +70,7 @@ class MentorController extends Controller
      */
     public function show($id)
     {
-        $showMentor=$this->mentorService->showMentor($id);
+        $showMentor = $this->mentorService->showMentor($id);
         return view('mentor.show', compact('showMentor'));
     }
 

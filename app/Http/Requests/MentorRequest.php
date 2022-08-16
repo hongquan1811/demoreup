@@ -24,8 +24,8 @@ class MentorRequest extends FormRequest
     public function rules()
     {
         return [
-            'mentor_name' => 'required',
-            'subject' => 'required'
+            'mentor_name' => 'bail|required|max:255',
+            'subject' => 'bail|required|max:255'
         ];
     }
 

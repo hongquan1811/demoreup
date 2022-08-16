@@ -15,10 +15,6 @@ class MentorService
 
     public function getAllMentor()
     {
-        $searchAuthor = \request()->search;
-        if($searchAuthor != ""){
-           return $this->mentorRepositoryInterface->searchMentor($searchAuthor);
-        }
         return $this->mentorRepositoryInterface->getAll();
     }
 
@@ -40,5 +36,9 @@ class MentorService
     public function deleteMentor($id)
     {
         return  $this->mentorRepositoryInterface->delete($id);
+    }
+    public function searchMentor($data)
+    {
+        return $this->mentorRepositoryInterface->searchMentor($data);
     }
 }

@@ -24,8 +24,8 @@ class SchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            'school_name' => 'required',
-            'address' => 'required'
+            'school_name' => 'bail|required|min:5|max:255',
+            'address' => 'bail|required|min:5|max:255'
         ];
     }
 

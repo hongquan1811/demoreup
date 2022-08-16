@@ -17,9 +17,9 @@ class ClassroomRepository extends BaseRepository implements ClassroomRepositoryI
     public function searchClassroom($data)
     {
         $dataSearch = Classroom::where('classroom_name', 'LIKE', "%$data%")
-            ->join('mentors', 'classroom_name.mentor_id', '=', 'mentors.id')
+            ->join('mentors', 'classrooms.mentor_id', '=', 'mentors.id')
             ->orwhere('mentors.mentor_name', 'LIKE', "%$data%")
-            ->orwhere('roof', 'LIKE', "%$data%");
+            ->orwhere('roof', 'LIKE', "%$data%")->get();
 
         return $dataSearch;
     }

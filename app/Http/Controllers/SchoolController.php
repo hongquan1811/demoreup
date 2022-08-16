@@ -18,13 +18,19 @@ class SchoolController extends Controller
 
     public function __construct(SchoolService $schoolService)
     {
-        $this->schoolService= $schoolService;
+        $this->schoolService = $schoolService;
     }
 
     public function index()
     {
-        $schools = $this->schoolService->getAllSchool();
-        return view('school.index', compact('schools'));
+        if(isset($_GET['search'])){
+            $schools_search = $_GET['search'];
+            $schools =  $this->schoolService->searchSchool($schools_search);
+        }
+        else {
+            $schools= $this->schoolService->getAllSchool();
+        }
+        return view('school.index',compact('schools'));
     }
 
     /**
@@ -44,7 +50,7 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(SchoolRequest $request)
+    public function store(Request $request)
     {
         $this->schoolService->createSchool($request->all());
         $notification = [

@@ -17,10 +17,6 @@ class ClassroomService
 
     public function getAllClassroom()
     {
-        $dataSearch = \request()->search;
-        if($dataSearch != ""){
-            return $this->classroomRepositoryInterface->searchClassroom($dataSearch);
-        }
         return $this->classroomRepositoryInterface->getAll();
     }
 
@@ -42,5 +38,9 @@ class ClassroomService
     public function deleteClassroom($id)
     {
         return $this->classroomRepositoryInterface->delete($id);
+    }
+    public function searchClassroom($data)
+    {
+        return $this->classroomRepositoryInterface->searchClassroom($data);
     }
 }

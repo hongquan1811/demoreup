@@ -7,6 +7,7 @@ use App\Models\Classroom;
 use App\Models\Mentor;
 use App\Services\ClassroomService;
 use App\Services\MentorService;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -19,15 +20,23 @@ class ClassroomController extends Controller
     public ClassroomService $classroomService;
     public MentorService $mentorService;
 
-    public function __construct(ClassroomService $classroomService, MentorService $mentorService)
-    {
+    public function __construct(
+        ClassroomService $classroomService,
+        MentorService $mentorService
+    ) {
         $this->classroomService = $classroomService;
         $this->mentorService = $mentorService;
     }
 
     public function index()
     {
-        $classrooms = $this->classroomService->getAllClassroom();
+        if(isset($_GET['search'])){
+            $classrooms_search = $_GET['search'];
+            $classrooms = $this->classroomService->searchClassroom($classrooms_search);
+        }
+        else{
+            $classrooms= $this->classroomService->getAllClassroom();
+        }
         return view('classroom.index', compact('classrooms'));
     }
 
@@ -49,7 +58,7 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(ClassroomRequest $request)
+    public function store(Request $request)
     {
         $this->classroomService->createClassroom($request->all());
         $notification = [
@@ -83,7 +92,7 @@ class ClassroomController extends Controller
     {
         $editClassroom = $this->classroomService->showClassroom($id);
         $mentors = $this->mentorService->getAllMentor();
-        return view('classroom.edit', compact('editClassroom','mentors'));
+        return view('classroom.edit', compact('editClassroom', 'mentors'));
     }
 
     /**

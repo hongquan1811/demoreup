@@ -14,7 +14,7 @@ class MentorRepository extends BaseRepository implements MentorRepositoryInterfa
 
     public function searchMentor($data)
     {
-        $dataSearch = Mentor::where('mentor_name','LIKE',"%$data$")
+        $dataSearch = Mentor::where('mentor_name','LIKE',"%$data%")
             ->orwhere('subject','LIKE',"%$data%")->get();
         return $dataSearch;
     }
