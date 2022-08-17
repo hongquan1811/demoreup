@@ -35,13 +35,7 @@ class StudentController extends Controller
 
     public function index()
     {
-        if(isset($_GET['search'])){
-            $students_search = $_GET['search'];
-            $students =  $this->studentService->searchStudent($students_search);
-        }
-        else {
-            $students = $this->studentService->getAllStudent();
-        }
+        $students = $this->studentService->getAllStudent();
         return view('student.index',compact('students'));
     }
 
