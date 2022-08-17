@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,19 +34,10 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Validation</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Validation</li>
-                        </ol>
-                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        @include('display.alert')
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -55,11 +45,11 @@
                     <!-- left column -->
                     <div class="col-md-12">
                         <!-- jquery validation -->
-{{--                        <div class="card card-primary">--}}
-{{--                            <div class="card-header">--}}
-{{--                                <h3 class="card-title">{{$title}}</h3>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="card card-primary">--}}
+                        {{--                            <div class="card-header">--}}
+                        {{--                                <h3 class="card-title">{{$title}}</h3>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                         @yield('content')
                     </div>
                     <!--/.col (left) -->
@@ -75,12 +65,12 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-{{--    <footer class="main-footer">--}}
-{{--        <div class="float-right d-none d-sm-block">--}}
-{{--            <b>Version</b> 3.1.0--}}
-{{--        </div>--}}
-{{--        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.--}}
-{{--    </footer>--}}
+    {{--    <footer class="main-footer">--}}
+    {{--        <div class="float-right d-none d-sm-block">--}}
+    {{--            <b>Version</b> 3.1.0--}}
+    {{--        </div>--}}
+    {{--        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.--}}
+    {{--    </footer>--}}
 
 </div>
 <!-- ./wrapper -->
