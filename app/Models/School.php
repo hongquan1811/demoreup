@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class School extends Model
 {
@@ -11,11 +12,11 @@ class School extends Model
 
     protected $table = 'schools';
     protected $fillable = [
-            'school_name',
-            'address'
-        ];
+        'school_name',
+        'address'
+    ];
 
-    public function students()
+    public function students(): HasMany
     {
         return $this->hasMany(Student::class);
     }

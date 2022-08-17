@@ -14,14 +14,12 @@ class StudentRepository extends BaseRepository implements StudentRepositoyInterf
 
     public function searchStudent($data)
     {
-        $dataSearch = Student::where('student_name', 'LIKE', "%$data%")
+        return $this->model->newModelQuery()->where('student_name', 'LIKE', "%$data%")
             ->join('schools', 'students.school_id', '=', 'schools.id')
             ->orwhere('schools.school_name', 'LIKE', "%$data%")
             ->join('classrooms', 'students.classroom_id', '=', 'classrooms.id')
             ->orwhere('classrooms.classroom_name', 'LIKE', "%$data%")
             ->orwhere('phone', 'LIKE', "%$data%")
             ->orwhere('description', 'LIKE', "%$data%")->get();
-
-        return $dataSearch;
     }
 }

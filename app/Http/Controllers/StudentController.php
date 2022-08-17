@@ -138,4 +138,16 @@ class StudentController extends Controller
         ];
         return redirect()->route('students.index')->with($notification);
     }
+
+    public function studentSearch()
+    {
+        if(isset($_GET['search'])){
+            $students_search = $_GET['search'];
+            $students =  $this->studentService->searchStudent($students_search);
+        }
+        else {
+            $students = $this->index();
+        }
+        return view('student.index',compact('students'));
+    }
 }

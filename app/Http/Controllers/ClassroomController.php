@@ -30,13 +30,7 @@ class ClassroomController extends Controller
 
     public function index()
     {
-        if(isset($_GET['search'])){
-            $classrooms_search = $_GET['search'];
-            $classrooms = $this->classroomService->searchClassroom($classrooms_search);
-        }
-        else{
-            $classrooms= $this->classroomService->getAllClassroom();
-        }
+        $classrooms= $this->classroomService->getAllClassroom();
         return view('classroom.index', compact('classrooms'));
     }
 
@@ -129,5 +123,17 @@ class ClassroomController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->route('classrooms.index')->with($notification);
+    }
+
+    public function classroomSearch()
+    {
+        if(isset($_GET['search'])){
+            $classrooms_search = $_GET['search'];
+            $classrooms = $this->classroomService->searchClassroom($classrooms_search);
+        }
+        else{
+            $classrooms= $this->index();
+        }
+        return view('classroom.index', compact('classrooms'));
     }
 }

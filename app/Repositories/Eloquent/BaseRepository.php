@@ -26,7 +26,7 @@ class BaseRepository
 
     public function findById($id)
     {
-        return $this->model->newModelQuery()->find($id);
+        return $this->model->newModelQuery()->findOrFail($id);
     }
 
     public function create(array $data)

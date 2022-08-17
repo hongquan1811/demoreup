@@ -7,41 +7,39 @@ use App\Repositories\SchoolRepositoryInterface;
 
 class SchoolService
 {
-    private SchoolRepositoryInterface $schoolRepositoryInterface;
+    private SchoolRepositoryInterface $schoolRepository;
 
-    public function __construct(
-        SchoolRepositoryInterface $schoolRepositoryInterface
-    ) {
-        $this->schoolRepositoryInterface = $schoolRepositoryInterface;
+    public function __construct(SchoolRepositoryInterface $schoolRepository) {
+        $this->schoolRepository = $schoolRepository;
     }
 
     public function getAllSchool()
     {
-        return $this->schoolRepositoryInterface->getAll();
+        return $this->schoolRepository->getAll();
     }
 
     public function createSchool(array $data)
     {
-        return $this->schoolRepositoryInterface->create($data);
+        return $this->schoolRepository->create($data);
     }
 
     public function showSchool($id)
     {
-        return $this->schoolRepositoryInterface->findById($id);
+        return $this->schoolRepository->findById($id);
     }
 
     public function updateSchool(array $array, $id)
     {
-        return $this->schoolRepositoryInterface->update($array, $id);
+        return $this->schoolRepository->update($array, $id);
     }
 
     public function deleteSchool($id)
     {
-        return $this->schoolRepositoryInterface->delete($id);
+        return $this->schoolRepository->delete($id);
     }
 
     public function searchSchool($data)
     {
-        return $this->schoolRepositoryInterface->searchSchool($data);
+        return $this->schoolRepository->searchSchool($data);
     }
 }

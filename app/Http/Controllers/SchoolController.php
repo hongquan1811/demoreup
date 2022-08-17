@@ -6,6 +6,8 @@ use App\Http\Requests\SchoolRequest;
 use App\Models\School;
 use App\Services\SchoolService;
 use Illuminate\Http\Request;
+use Nette\Utils\Strings;
+use PhpParser\Node\Scalar\String_;
 
 class SchoolController extends Controller
 {
@@ -23,13 +25,7 @@ class SchoolController extends Controller
 
     public function index()
     {
-        if(isset($_GET['search'])){
-            $schools_search = $_GET['search'];
-            $schools =  $this->schoolService->searchSchool($schools_search);
-        }
-        else {
-            $schools= $this->schoolService->getAllSchool();
-        }
+        $schools= $this->schoolService->getAllSchool();
         return view('school.index',compact('schools'));
     }
 
@@ -121,4 +117,17 @@ class SchoolController extends Controller
         ];
         return redirect()->route('schools.index')->with($notification);
     }
+
+    public function schoolSearch()
+    {
+        if(isset($_GET['search'])){
+            $schools_search = $_GET['search'];
+            $schools =  $this->schoolService->searchSchool($schools_search);
+        }
+        else {
+            $schools= $this->schoolService->getAllSchool();
+        }
+        return view('school.index',compact('schools'));
+    }
+
 }

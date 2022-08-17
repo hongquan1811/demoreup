@@ -14,8 +14,7 @@ class SchoolRepository extends BaseRepository implements SchoolRepositoryInterfa
 
     public function searchSchool($data)
     {
-        $dataSearch = School::where('school_name','LIKE',"%$data%")
+        return $this->model->newModelQuery()->where('school_name','LIKE',"%$data%")
             ->orwhere('address','LIKE',"%$data%")->get();
-        return $dataSearch;
     }
 }

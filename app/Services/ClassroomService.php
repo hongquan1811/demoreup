@@ -8,39 +8,39 @@ use Illuminate\Support\Facades\Validator;
 
 class ClassroomService
 {
-    private  ClassroomRepositoryInterface $classroomRepositoryInterface;
+    private  ClassroomRepositoryInterface $classroomRepository;
 
-    public function __construct(ClassroomRepositoryInterface $classroomRepositoryInterface)
+    public function __construct(ClassroomRepositoryInterface $classroomRepository)
     {
-        $this->classroomRepositoryInterface = $classroomRepositoryInterface;
+        $this->classroomRepository = $classroomRepository;
     }
 
     public function getAllClassroom()
     {
-        return $this->classroomRepositoryInterface->getAll();
+        return $this->classroomRepository->getAll();
     }
 
     public function createClassroom(array $data)
     {
-        return $this->classroomRepositoryInterface->create($data);
+        return $this->classroomRepository->create($data);
     }
 
     public function showClassroom($id)
     {
-        return $this->classroomRepositoryInterface->findById($id);
+        return $this->classroomRepository->findById($id);
     }
 
     public function updateClassroom(array $data, $id)
     {
-        return $this->classroomRepositoryInterface->update($data, $id);
+        return $this->classroomRepository->update($data, $id);
     }
 
     public function deleteClassroom($id)
     {
-        return $this->classroomRepositoryInterface->delete($id);
+        return $this->classroomRepository->delete($id);
     }
     public function searchClassroom($data)
     {
-        return $this->classroomRepositoryInterface->searchClassroom($data);
+        return $this->classroomRepository->searchClassroom($data);
     }
 }

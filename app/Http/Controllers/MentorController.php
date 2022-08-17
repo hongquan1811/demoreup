@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassroomRequest;
 use App\Http\Requests\MentorRequest;
 use App\Services\MentorService;
 use Illuminate\Http\Request;
 use App\Models\Mentor;
+use Illuminate\Http\Response;
 
 class MentorController extends Controller
 {
@@ -19,24 +21,18 @@ class MentorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        if(isset($_GET['search'])){
-            $mentors_search = $_GET['search'];
-            $mentors =  $this->mentorService->searchMentor($mentors_search);
-        }
-        else {
-            $mentors= $this->mentorService->getAllMentor();
-        }
+        $mentors= $this->mentorService->getAllMentor();
         return view('mentor.index',compact('mentors'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -48,9 +44,9 @@ class MentorController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(MentorRequest $request)
     {
         $this->mentorService->createMentor($request->all());
 
@@ -66,7 +62,7 @@ class MentorController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -79,7 +75,7 @@ class MentorController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -93,7 +89,7 @@ class MentorController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int                      $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(MentorRequest $request, $id)
     {
@@ -111,7 +107,7 @@ class MentorController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
@@ -121,5 +117,17 @@ class MentorController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()->route('mentors.index')->with($notification);
+    }
+
+    public function mentorSearch()
+    {
+        if(isset($_GET['search'])){
+            $mentors_search = $_GET['search'];
+            $mentors =  $this->mentorService->searchMentor($mentors_search);
+        }
+        else {
+            $mentors= $this->index();
+        }
+        return view('mentor.index',compact('mentors'));
     }
 }

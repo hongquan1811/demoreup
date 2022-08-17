@@ -6,39 +6,39 @@ use App\Repositories\MentorRepositoryInterface;
 
 class MentorService
 {
-    private MentorRepositoryInterface $mentorRepositoryInterface;
+    private MentorRepositoryInterface $mentorRepository;
 
-    public function __construct(MentorRepositoryInterface $mentorRepositoryInterface)
+    public function __construct(MentorRepositoryInterface $mentorRepository)
     {
-        $this->mentorRepositoryInterface = $mentorRepositoryInterface;
+        $this->mentorRepository = $mentorRepository;
     }
 
     public function getAllMentor()
     {
-        return $this->mentorRepositoryInterface->getAll();
+        return $this->mentorRepository->getAll();
     }
 
     public function createMentor(array $data)
     {
-        return $this->mentorRepositoryInterface->create($data);
+        return $this->mentorRepository->create($data);
     }
 
     public function showMentor($id)
     {
-        return $this->mentorRepositoryInterface->findById($id);
+        return $this->mentorRepository->findById($id);
     }
 
     public function updateMentor(array $array, $id)
     {
-        return $this->mentorRepositoryInterface->update($array, $id);
+        return $this->mentorRepository->update($array, $id);
     }
 
     public function deleteMentor($id)
     {
-        return  $this->mentorRepositoryInterface->delete($id);
+        return  $this->mentorRepository->delete($id);
     }
     public function searchMentor($data)
     {
-        return $this->mentorRepositoryInterface->searchMentor($data);
+        return $this->mentorRepository->searchMentor($data);
     }
 }
