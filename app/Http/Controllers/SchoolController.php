@@ -119,16 +119,9 @@ class SchoolController extends Controller
         return redirect()->route('schools.index')->with($notification);
     }
 
-    public function schoolSearch()
+    public function schoolSearch(Request $request)
     {
-        if(isset($_GET['search'])){
-            $schools_search = $_GET['search'];
-            $schools =  $this->schoolService->searchSchool($schools_search);
-        }
-        else {
-            $schools= $this->schoolService->getAllSchool();
-        }
+        $schools = $this->schoolService->searchSchool($request->get('search'));
         return view('school.index',compact('schools'));
     }
-
 }

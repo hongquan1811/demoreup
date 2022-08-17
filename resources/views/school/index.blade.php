@@ -22,8 +22,7 @@
             <form action="{{ route('schoolSearch') }}" method="get" style="display: inline-block">
                 <input type="search" class="form-control" name="search" style="margin-left: 1100px"
                        placeholder="Search here" value="{{request()->search}}">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search
-                </button>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search</button>
             </form>
         </div>
         @php

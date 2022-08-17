@@ -13,7 +13,7 @@
             <th scope="col">Option</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="listClassroom">
         <div>
             <a href="{{route('classrooms.create')}}">
                 <button type="button" class="btn btn-primary">Add</button>
@@ -21,7 +21,7 @@
         </div>
         <div class="input-group mb-3">
             <form action="{{route('classroomSearch')}}" style="display: inline-block">
-                <input type="search" class="form-control" name="search" style="margin-left: 1100px"
+                <input type="search" class="form-control" name="search" id="search" style="margin-left: 1100px"
                        placeholder="Search here" value="">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search
                 </button>
@@ -62,6 +62,26 @@
                 event.preventDefault();
         }
     </script>
+    <script>
+        $(document).ready(function (){
+            $(document).on('keyup','search', function (){
+                var search = $(this).val();
+
+                $.ajax({
+                    type: "get",
+                    url: "/search",
+                    data: {
+                        search: search
+                    },
+                    dataType: "json",
+                    success: function (response){
+                        $('#listClassroom').html(response);
+                    }
+                });
+            });
+        })
+    </script>
+
 @endsection
 
 

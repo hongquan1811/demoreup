@@ -126,15 +126,9 @@ class ClassroomController extends Controller
         return redirect()->route('classrooms.index')->with($notification);
     }
 
-    public function classroomSearch()
+    public function classroomSearch(Request $request)
     {
-        if(isset($_GET['search'])){
-            $classrooms_search = $_GET['search'];
-            $classrooms = $this->classroomService->searchClassroom($classrooms_search);
-        }
-        else{
-            $classrooms= $this->index();
-        }
+        $classrooms = $this->classroomService->searchClassroom($request->get('search'));
         return view('classroom.index', compact('classrooms'));
     }
 }

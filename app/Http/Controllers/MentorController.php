@@ -120,15 +120,9 @@ class MentorController extends Controller
         return redirect()->route('mentors.index')->with($notification);
     }
 
-    public function mentorSearch()
+    public function mentorSearch(Request $request)
     {
-        if(isset($_GET['search'])){
-            $mentors_search = $_GET['search'];
-            $mentors =  $this->mentorService->searchMentor($mentors_search);
-        }
-        else {
-            $mentors= $this->index();
-        }
+        $mentors = $this->mentorService->searchMentor($request->get('search'));
         return view('mentor.index',compact('mentors'));
     }
 }
