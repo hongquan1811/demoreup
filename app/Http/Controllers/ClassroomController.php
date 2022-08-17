@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClassroomRequest;
+use App\Http\Requests\ClassroomUpdateRequest;
 use App\Models\Classroom;
 use App\Models\Mentor;
 use App\Services\ClassroomService;
@@ -52,7 +53,7 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassroomRequest $request)
     {
         $this->classroomService->createClassroom($request->all());
         $notification = [
@@ -97,7 +98,7 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ClassroomRequest $request, $id)
+    public function update(ClassroomUpdateRequest $request, $id)
     {
         $this->classroomService->updateClassroom($request->all(), $id);
         $notification = [

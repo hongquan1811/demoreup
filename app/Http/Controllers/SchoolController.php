@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SchoolRequest;
+use App\Http\Requests\SchoolUpdateRequest;
 use App\Models\School;
 use App\Services\SchoolService;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
         $this->schoolService->createSchool($request->all());
         $notification = [
@@ -90,7 +91,7 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(SchoolRequest $request, $id)
+    public function update(SchoolUpdateRequest $request, $id)
     {
         $this->schoolService->updateSchool($request->all(), $id);
         $notification = [

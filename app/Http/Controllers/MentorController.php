@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClassroomRequest;
 use App\Http\Requests\MentorRequest;
+use App\Http\Requests\MentorUpdateRequest;
 use App\Services\MentorService;
 use Illuminate\Http\Request;
 use App\Models\Mentor;
@@ -91,7 +92,7 @@ class MentorController extends Controller
      *
      * @return Response
      */
-    public function update(MentorRequest $request, $id)
+    public function update(MentorUpdateRequest $request, $id)
     {
         $this->mentorService->updateMentor($request->all(), $id);
         $notification = [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Models\Classroom;
 use App\Models\Mentor;
 use App\Models\School;
@@ -63,7 +64,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $this->studentService->createStudent($request->all());
 
@@ -99,8 +100,7 @@ class StudentController extends Controller
         $editStudent = $this->studentService->showStudent($id);
         $schools = $this->schoolService->getAllSchool();
         $classrooms = $this->classroomService->getAllClassroom();
-        return view('student.edit',
-            compact('editStudent', 'schools', 'classrooms'));
+        return view('student.edit', compact('editStudent', 'schools', 'classrooms'));
     }
 
     /**
@@ -111,7 +111,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, $id)
+    public function update(StudentUpdateRequest $request, $id)
     {
         $this->studentService->updateStudent($request->all(), $id);
         $notification = [
